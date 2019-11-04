@@ -15,34 +15,41 @@ firebase.initializeApp(firebaseConfig);
 var trainInfo = firebase.database();
 
 //submitting new train info
-$("#add-train-info").on("click", function(event){
+$("#addtrain").on("click", function(event){
     event.preventDefault();
 
 //getting user's input
-var trainName = $("#trainInput").val().trim();
-var trainDestination = $("#destinationInput").val().trim();
-var trainFirstTrain = $("#firstInput");
-var trainFrequency = moment($("#frequencyInput").val().trim(), "00:00").format("hh:mm");
+var name = $("#train").val().trim();
+var destination = $("#destination").val().trim();
+var firstTrain = $("#first");
+var frequency = moment($("#frequency").val().trim(), "00:00").format("hh:mm");
 
 //temp storage
 var fillTrain = {
-    trainName= trainInput,
-    trainDestination= destinationInput,
-    trainFirstTrain = firstInput,
-    trainFrequency= frequencyInput,
+    name= trainInput,
+    destination= destinationInput,
+    firstTrain = firstInput,
+    frequency= frequencyInput,
 };
 //allowing train data to appear
-database.ref().push(fillTrain);
+trainInfo.ref().push(fillTrain);
 
-console.log(fillTrain.trainName);
-console.log(fillTrain.trainDestination);
-console.log(fillTrain.trainFirstTrain);
-console.log(fillTrain.trainfrequency)
+console.log("if it added to firebase")
+console.log(fillTrain.name);
+console.log(fillTrain.destination);
+console.log(fillTrain.firstTrain);
+console.log(fillTrain.frequency);
 
+alert("train added")
 
-
-
-
-
+//clear input
+$("train").val("");
+$("destination").val("");
+$("first").val("");
+$("frequency").val("");
 
 });
+
+database.ref().on("child_added"), function(childSnapshot){
+
+}

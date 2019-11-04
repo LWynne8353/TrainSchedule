@@ -2,9 +2,20 @@
 <html>
 
 <head>
+    <title>TrainSchedule</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!--Moment-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!--firebase app  -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+
+    <!--firebase where the data is stored -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
 </head>
 
 <body>
@@ -18,7 +29,7 @@
         </div>
 
 
-<!---Displays train, destination, minutes, next arrival and how far away-->
+        <!---Displays train, destination, minutes, next arrival and how far away-->
         <div class="row">
             <div class="col-md-12">
                 <div class="card mb-4">
@@ -45,7 +56,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                    <!--Train Added-->
+                <!--Train To Add-->
                 <div class="card mb-4">
                     <div class="card-header">Add Train</div>
                     <div class="card-body">
@@ -53,35 +64,29 @@
                         <form>
                             <div class="form-group">
                                 <label for="trainName">Train Name</label>
-                                <input type="text" class="form-control" id="trainInput" placeholder="Train">
+                                <input type="text" class="form-control" id="train" placeholder="Train">
                             </div>
                             <div class="form-group">
-                                <label for="trainDestination">Destination</label>
-                                <input type="text" class="form-control" id="destinationInput" placeholder="To">
+                                <label for="Destination">Destination</label>
+                                <input type="text" class="form-control" id="destination" placeholder="To">
                             </div>
                             <div class="form-group">
-                                <label for="trainFirst">First Train</label>
-                                <input type="text" class="form-control" id="firstInput" placeholder="00:00">
+                                <label for="First">First Train</label>
+                                <input type="text" class="form-control" id="first" placeholder="00:00">
                             </div>
                             <div class="form-group">
-                                <label for="trainFrequency">Frequency(Min)</label>
-                                <input type="text" class="form-control" id="frequencyInput" placeholder="Minutes">
+                                <label for="Frequency">Frequency(Min)</label>
+                                <input type="text" class="form-control" id="frequency" placeholder="Minutes">
                             </div>
 
                             </label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" id= "addTrain">Submit</button>
+                <button type="submit" class="btn btn-primary" id="addTrain">Submit</button>
                 </form>
 
-                <!--Moment-->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-                <!--firebase app  -->
-                <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
-
-                <!--firebase where the data is stored -->
-                <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+                <!--Link to javascript file-->
+                <script scr="script.js"></script>
 </body>
 
 </html>
