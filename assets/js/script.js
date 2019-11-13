@@ -12,44 +12,82 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-var trainInfo = firebase.database();
+var database = firebase.database();
 
 //submitting new train info
-$("#addtrain").on("click", function(event){
+$("#addTrain").on("click", function(event){
     event.preventDefault();
 
 //getting user's input
-var name = $("#train").val().trim();
-var destination = $("#destination").val().trim();
-var firstTrain = $("#first");
-var frequency = moment($("#frequency").val().trim(), "00:00").format("hh:mm");
+var thetrain = $("#train").val().trim();
+var thedestination = $("#destination").val().trim();
+var thefirst = $("#first").val().trim();
+var thefrequency = $("#frequency").val().trim();
 
 //temp storage
 var fillTrain = {
-    name= trainInput,
-    destination= destinationInput,
-    firstTrain = firstInput,
-    frequency= frequencyInput,
+    train: thetrain,
+    destination: thedestination,
+    first: thefirst,
+    frequency: thefrequency,
 };
 //allowing train data to appear
-trainInfo.ref().push(fillTrain);
+database.ref().push(fillTrain);
 
-console.log("if it added to firebase")
-console.log(fillTrain.name);
-console.log(fillTrain.destination);
-console.log(fillTrain.firstTrain);
-console.log(fillTrain.frequency);
+//console.log("if it added to firebase");
+//console.log(fillTrain.train);
+//console.log(fillTrain.destination);
+//console.log(fillTrain.first);
+//console.log(fillTrain.frequency)
 
-alert("train added")
+//alert("train added")
 
 //clear input
-$("train").val("");
-$("destination").val("");
-$("first").val("");
-$("frequency").val("");
+$("#train").val("");
+$("#destination").val("");
+$("#first").val("");
+$("#frequency").val("");
 
 });
 
-database.ref().on("child_added"), function(childSnapshot){
+database.ref().on("child_added", function(childSnapshot){
+    console.log(childSnapshot.val());
 
-}
+ thetrain = childSnapshot.val().train;
+ thedestination = childSnapshot.val().destination;
+ thefirst = childSnapshot.val().first;
+ thefrequency = childSnapshot.val().frequency;
+
+ var newRow = $("<tr>");
+
+ // The train
+ var trainCol = $("<td>");
+ trainCol.text(thetrain);
+
+ newRow.append(trainCol);
+ 
+ // The dest
+ var destCol = $("<td>");
+ destCol.text(thedestination);
+
+ newRow.append(destCol);
+
+ // The first
+ var firstCol = $("<td>");
+ firstCol.text(thedestination);
+
+ newRow.append(firstCol);
+
+  // The frequency
+  var freqCol = $("<td>");
+  freqCol.text(thedestination);
+ 
+  newRow.append(freqCol);
+
+
+ $("tbody").append(newRow);
+});
+
+//function newFunction(event) {
+//    console.log(event);
+//}
