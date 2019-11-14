@@ -58,6 +58,10 @@ database.ref().on("child_added", function(childSnapshot){
  thefirst = childSnapshot.val().first;
  thefrequency = childSnapshot.val().frequency;
 
+ //displaying military time for first train
+ var miltime = thefirst.split(" : ");
+ var thefirst = moment().hours(miltime[0]).minutes(miltime[1]);
+
  var newRow = $("<tr>");
 
  // The train
@@ -74,7 +78,7 @@ database.ref().on("child_added", function(childSnapshot){
 
  // The first
  var firstCol = $("<td>");
- firstCol.text(thedestination);
+ firstCol.text(thefirst);
 
  newRow.append(firstCol);
 
