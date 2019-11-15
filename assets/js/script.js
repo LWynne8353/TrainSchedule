@@ -58,9 +58,33 @@ database.ref().on("child_added", function(childSnapshot){
  thefirst = childSnapshot.val().first;
  thefrequency = childSnapshot.val().frequency;
 
- //displaying military time for first train
- var miltime = thefirst.split(" : ");
- var thefirst = moment().hours(miltime[0]).minutes(miltime[1]);
+//log military time for first train
+// var trainArr = thefirst.split(":");
+// var militaryHour = trainArr[0];
+// var militaryMin = trainArr[1];
+
+// var trainTime = moment().hours(militaryHour).minutes(militaryMin);
+
+// console.log(trainTime);
+
+// First Time (pushed back 1 year to make sure it comes before current time)
+var firstTimeConverted = moment(thefirst, "HH:mm").subtract(1, "years");
+console.log(firstTimeConverted);
+
+// Difference between the times
+var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+console.log("DIFFERENCE IN TIME: " + diffTime, "minutes");
+
+// Time apart (remainder)
+var tRemainder = diffTime % thefrequency;
+console.log("tRemainder: " + tRemainder);
+
+var tMinutesTillTrain = thefrequency - tRemainder;
+console.log(tMinutesTillTrain);
+
+// Next Train
+var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
  var newRow = $("<tr>");
 
@@ -82,11 +106,18 @@ database.ref().on("child_added", function(childSnapshot){
 
  newRow.append(firstCol);
 
+
   // The frequency
   var freqCol = $("<td>");
-  freqCol.text(thedestination);
+  freqCol.text(tMinutesTillTrain);
  
   newRow.append(freqCol);
+
+   // Next train
+ var minutesAwayCol = $("<td>");
+ minutesAwayCol.text(nextTrain);
+
+ newRow.append(minutesAwayCol);
 
 
  $("tbody").append(newRow);
